@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Product List</h3>
+    <h3 class="panel-title">{{pageTitle}}</h3>
   </div>
   <div class="panel-body">
 
@@ -23,9 +23,8 @@
         <thead>
           <tr>
             <th>
-              <button type="button" class="btn btn-primary"
-              (click)='toogleImage()'>
-              {{showImage ? 'Hide' : 'Show'}} Image</button>
+              <button type="button" class="btn btn-primary" (click)='toogleImage()'>
+                {{showImage ? 'Hide' : 'Show'}} Image</button>
             </th>
             <th>Product</th>
             <th>Code</th>
@@ -37,18 +36,17 @@
         <tbody>
           <tr *ngFor='let product of filteredProducts'>
             <td>
-              <img *ngIf='showImage'
-              [src]='product.imageUrl'
-              [alt]='product.productName'
-              [title]='product.productName | uppercase'
-              [style.width.px]='imageWidth'
-              [style.margin.px]='imageMargin'>
+              <img *ngIf='showImage' [src]='product.imageUrl' [alt]='product.productName' [title]='product.productName | uppercase' [style.width.px]='imageWidth'
+                [style.margin.px]='imageMargin'>
             </td>
             <td>{{product.productName}}</td>
             <td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
             <td>{{product.releaseDate}}</td>
             <td>{{product.price | currency: 'USD':true:'1.2-2'}}</td>
-            <td>{{product.starRating}}</td>
+            <td>
+              <pm-star [rating]='product.starRating'
+                (ratingClicked)='onRatingClicked($event)'></pm-star>
+            </td>
           </tr>
         </tbody>
       </table>

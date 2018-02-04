@@ -10,6 +10,7 @@ export class ProductListComponent implements OnInit {
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
+  pageTitle: string = 'Product List';
 
   _listFilter: string;
   get listFilter(): string {
@@ -84,6 +85,9 @@ export class ProductListComponent implements OnInit {
     this.filteredProducts = this.products;
   }
 
+  onRatingClicked(message: string): void {
+    this.pageTitle = 'Product List: ' + message;
+  }
   performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: IProduct) =>
